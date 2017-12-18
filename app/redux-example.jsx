@@ -18,6 +18,11 @@ var reducer = (state = {name: 'Anon'}, action) => {
 
 var store = redux.createStore(reducer);
 
+//Subscribe to changes
+store.subscribe(() => {
+    var state = store.getState();
+});
+
 var currentState = store.getState();
 console.log('currentState ', currentState);
 

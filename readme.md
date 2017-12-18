@@ -1,2 +1,2 @@
-React Timer Application
+My attempts at learning what Redux is all about...
 
