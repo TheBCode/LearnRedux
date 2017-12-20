@@ -5,9 +5,8 @@ console.log('Starting todo redux example');
 var stateDefault = {
     searchText: '',
     showCompleted: false,
-    todo: []
+    todos: []
 };
-
 var reducer = (state = stateDefault, action) => {
     switch (action.type) {
         case 'CHANGE_SEARCH_TEXT':
@@ -19,26 +18,30 @@ var reducer = (state = stateDefault, action) => {
             return state;
     }
 };
-
 var store = redux.createStore(reducer, redux.compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 
-var unsubscribe = store.subscribe(() => {
-    var currentState = store.getState();
+// Subscribe to changes
+store.subscribe(() => {
+    var state = store.getState();
 
-    console.log('currentState ', currentState.searchText);
-    document.getElementById('app').innerHTML = currentState.searchText;
+    document.getElementById('app').innerHTML = state.searchText;
+});
+
+console.log('currentState', store.getState());
+
+store.dispatch({
+    type: 'CHANGE_SEARCH_TEXT',
+    searchText: 'work'
 });
 
 store.dispatch({
     type: 'CHANGE_SEARCH_TEXT',
-    searchText: 'Test search text'
+    searchText: 'dog'
 });
 
 store.dispatch({
     type: 'CHANGE_SEARCH_TEXT',
-    searchText: 'Test search text again!'
+    searchText: 'Something else'
 });
-
-
